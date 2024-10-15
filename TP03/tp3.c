@@ -116,9 +116,15 @@ void afficherMatriceListes(matrice_creuse m) {
 //  4.	Ecrire une fonction qui renvoie la valeur de l'élément de la ligne i et la colonne j
 int rechercherValeur(matrice_creuse m, int i, int j) {
     int result = 0;
-    /*
-    * TO DO : Ecrire ici votre code
-    */
+
+    element* elem = m.tab_lignes[i];
+    while (elem!=NULL && elem->col<j) {
+        elem = elem->suivant;
+    }
+    if (elem!=NULL && elem->col==j) {
+        result = elem->val;
+    }
+
     return result;
 }
 
