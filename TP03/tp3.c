@@ -185,6 +185,19 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
     /*
     * TO DO : Ecrire ici votre code
     */
+    element* current1;
+    element* current2;
+
+    for (int i=0; i<m1.Nlignes; i++) {
+        current1 = m1.tab_lignes[i];
+        current2 = m2.tab_lignes[i];
+        while(current2!=NULL) {
+            while(current1!=NULL && current1->col<current2->col) {
+                if {} //EN CHANTIER
+            }
+        }
+    }
+
 }
 
 
