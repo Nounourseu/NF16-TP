@@ -132,9 +132,50 @@ int rechercherValeur(matrice_creuse m, int i, int j) {
 
 // 5.	Ecrire une fonction qui affecte une valeur donnée à l'élément de la ligne i et la colonne j
 void affecterValeur(matrice_creuse m, int i, int j, int val) {
-    /*
-    * TO DO : Ecrire ici votre code
-    */
+
+    if(i >= m.Nlignes || j >= m.Ncolonnes){
+        printf("outOfRange");
+        return;
+    }
+
+    if(m.tab_lignes[i] == NULL){
+        m.tab_lignes[i] = creerElement(j,val);
+    }
+    else{
+        element * current = m.tab_lignes[i];
+        element * old = NULL;
+
+
+        while(current){
+            if(current->col == j){
+                current->val = val;
+                current = NULL;
+            }
+            else if(current->col > j){
+                element * newEl = creerElement(j,val);
+
+                if(old != NULL){
+                    old->suivant = newEl;
+                    newEl->suivant = current;
+
+                }
+                else{
+                    newEl->suivant = current;
+                    m.tab_lignes[i] = newEl;
+                }
+            }
+
+            old = current;
+            current = current->suivant;
+        }
+
+        if(old->col < j){
+            element * newEl = creerElement(j,val);
+            old->suivant = newEl;
+        }
+    }
+
+
 }
 
 
