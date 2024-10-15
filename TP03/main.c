@@ -5,6 +5,15 @@
 
 int main() {
 
+
+    matrice_creuse m;
+
+    remplirMatrice(&m, 3,3);
+    afficherMatrice(m);
+
+
+
+
     // ============= MENU UTILISATEUR ============= */
     char choix = '0';
     while (choix != '8') {
