@@ -38,10 +38,49 @@ void remplirMatrice(matrice_creuse *m, int N, int M) {
 
 // 2.	Ecrire une fonction qui permet d�afficher une matrice creuse sous forme de tableau
 void afficherMatrice(matrice_creuse m){
-    /*
-    * TO DO : Ecrire ici votre code
-    */
-}
+    for(int i = 0; i < m.Nlignes; i++){
+
+        element * current =  m.tab_lignes[i];
+
+        if(current == NULL){
+            for(int j = 0; j < m.Ncolonnes; j++){
+                printf("0 ");
+            }
+        }
+        else{
+            element * old = current;
+            current = current->suivant;
+
+            for(int j = 0; j < old->col; j++){
+                printf("0 ");
+            }
+
+            while (current){
+                printf("%d ", old->val);
+
+                for(int j = 0; j < current->col - old->col - 1; j++){
+                    printf("0 ");
+                }
+
+
+                old = current;
+                current = current->suivant;
+
+                }
+
+            printf("%d ", old->val);
+
+            if(old->col < m.Ncolonnes){
+                for(int j = 0; j < m.Ncolonnes - old->col - 1; j++){
+                    printf("0 ");
+                    }
+                }
+            }
+
+            printf("\n");
+        }
+
+    }
 
 
 
