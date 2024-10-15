@@ -99,9 +99,16 @@ void afficherMatrice(matrice_creuse m){
 
 // 3.	Ecrire une fonction qui permet d’afficher toutes les listes chaînées
 void afficherMatriceListes(matrice_creuse m) {
-    /*
-    * TO DO : Ecrire ici votre code
-    */
+    for(int i = 0; i < m.Nlignes; i++){
+        element * current = m.tab_lignes[i];
+
+        while(current){
+            printf("%d ", current->val);
+
+            current = current->suivant;
+        }
+        printf("\n");
+    }
 }
 
 
