@@ -8,35 +8,48 @@
 
 // 1.	Ecrire une fonction qui permet de remplir une matrice creuse
 void remplirMatrice(matrice_creuse *m, int N, int M) {
-    /*
-    * TO DO : Ecrire ici votre code
-    */
-    struct Element *elem;
-    int valeur;
-    element* temp;
+    int val;
 
-    for (int i=0; i<N; i++){
-        printf("\nLigne %d:\n", i);
-        liste_ligne *current = m[i];
-        for (int j=0; j<M; j++) {
-            if (current->col!=j){
-                printf("\nColonne %d:\n", i);
-                scanf("%d", &elem);
-                if (valeur!=0) {
-                    elem = (element*)malloc(sizeof(element));
-                    elem->col = j;
-                    elem->val = valeur;
+    m->tab_lignes = (matrice_creuse *) malloc(sizeof(element) * N);
+
+    m->Nlignes = N;
+    m->Ncolonnes = M;
+
+    for(int i = 0; i < N; i++){
+        m->tab_lignes[i] = NULL;
+    }
+
+    for(int i = 0; i < N; i++){
+
+        for(int j = 0; j < M; j++){
+            printf("Donnez la valeur en %d,%d : ", i,j);
+            scanf("%d", &val);
+
+            if(val != 0){
+                element * newEl = creerElement(j,val);
+
+                if(m->tab_lignes[i] == NULL){
+                    m->tab_lignes[i] = newEl;
+                }
+                else{
+                    element * current = m->tab_lignes[i];
+
+                    while(current->suivant){
+                        current = current->suivant;
+                    }
+                    current->suivant = newEl;
                 }
             }
-            current = current->suivant;
 
         }
+
     }
 }
 
 
 
-// 2.	Ecrire une fonction qui permet d�afficher une matrice creuse sous forme de tableau
+
+// 2.	Ecrire une fonction qui permet d’afficher une matrice creuse sous forme de tableau
 void afficherMatrice(matrice_creuse m){
     for(int i = 0; i < m.Nlignes; i++){
 
@@ -84,7 +97,7 @@ void afficherMatrice(matrice_creuse m){
 
 
 
-// 3.	Ecrire une fonction qui permet d�afficher toutes les listes cha�n�es
+// 3.	Ecrire une fonction qui permet d’afficher toutes les listes chaînées
 void afficherMatriceListes(matrice_creuse m) {
     /*
     * TO DO : Ecrire ici votre code
@@ -93,7 +106,7 @@ void afficherMatriceListes(matrice_creuse m) {
 
 
 
-//  4.	Ecrire une fonction qui renvoie la valeur de l'�l�ment de la ligne i et la colonne j
+//  4.	Ecrire une fonction qui renvoie la valeur de l'élément de la ligne i et la colonne j
 int rechercherValeur(matrice_creuse m, int i, int j) {
     int result = 0;
     /*
@@ -104,7 +117,7 @@ int rechercherValeur(matrice_creuse m, int i, int j) {
 
 
 
-// 5.	Ecrire une fonction qui affecte une valeur donn�e � l'�l�ment de la ligne i et la colonne j
+// 5.	Ecrire une fonction qui affecte une valeur donnée à l'élément de la ligne i et la colonne j
 void affecterValeur(matrice_creuse m, int i, int j, int val) {
     /*
     * TO DO : Ecrire ici votre code
@@ -113,7 +126,7 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
 
 
 
-// 6.	Ecrire une fonction qui r�alise la somme de deux matrices
+// 6.	Ecrire une fonction qui réalise la somme de deux matrices
 void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
     /*
     * TO DO : Ecrire ici votre code
@@ -122,7 +135,7 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
 
 
 
-// 7.	Ecrire une fonction qui retourne le nombre d�octets gagn�s
+// 7.	Ecrire une fonction qui retourne le nombre d’octets gagnés
 int nombreOctetsGagnes(matrice_creuse m) {
     int result = 0;
     /*
@@ -135,7 +148,7 @@ int nombreOctetsGagnes(matrice_creuse m) {
 
 /*==============  FONCTIONS SUPPLEMENTAIRES ===============*/
 
-// fonction qui renvoie un nouvel �l�ment de liste
+// fonction qui renvoie un nouvel élément de liste
 element *creerElement(int colonne, int valeur) {
     element *nouvelElement = malloc(sizeof(element));
     nouvelElement->col = colonne;
@@ -145,7 +158,7 @@ element *creerElement(int colonne, int valeur) {
 }
 
 
-// fonction qui permet de vider le buffer d'entr�e clavier
+// fonction qui permet de vider le buffer d'entrée clavier
 void viderBuffer (){
     char c;
     do {
