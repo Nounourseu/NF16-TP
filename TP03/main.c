@@ -67,13 +67,9 @@ int main() {
                 afficherMatrice(m1);
                 printf("\n  +\n\n");
                 afficherMatrice(m2);
-                printf("\n=\n");
-
-                printf("\naddition...\n");
+                printf("\n  =\n");
 
                 additionerMatrices(m1, m2);
-
-
 
                 afficherMatrice(m1);
 
