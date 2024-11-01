@@ -226,11 +226,24 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
 
 // 7.	Ecrire une fonction qui retourne le nombre d’octets gagnés
 int nombreOctetsGagnes(matrice_creuse m) {
-    int result = 0;
-    /*
-    * TO DO : Ecrire ici votre code
-    */
-    return result;
+    /* JSP SI J'AI LE BON RESULTAT*/
+    int tailleTab = m.Ncolonnes * m.Nlignes * sizeof(int);
+
+    int tailleMat = sizeof(m) + m.Nlignes * sizeof(liste_ligne);
+
+    int nb_elem = 0;
+
+    for (int i=0; i<m.Nlignes; i++) {
+        element* current = m.tab_lignes[i];
+        while (current!=NULL) {
+            nb_elem+=1;
+            current = current->suivant;
+        }
+    }
+
+    tailleMat+= nb_elem*sizeof(element);
+
+    return tailleTab - tailleMat;
 }
 
 
