@@ -191,9 +191,31 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
     for (int i=0; i<m1.Nlignes; i++) {
         current1 = m1.tab_lignes[i];
         current2 = m2.tab_lignes[i];
-        while(current2!=NULL) {
-            while(current1!=NULL && current1->col<current2->col) {
-                if {} //EN CHANTIER
+        if (current1==NULL) {
+            m1.tab_lignes[i] = m2.tab_lignes[i];
+        }
+        else {
+            while(current2!=NULL) {
+
+                while(current1->suivant!=NULL && current1->suivant->col <= current2->col) {
+                    current1 = current1->suivant;
+                }
+                if (current1->col == current2->col) {
+                    current1->val += current2->val;
+                }
+                else if (current1->suivant!=NULL){
+                    // On gagne du temps en ajoutant directement tout le reste de la liste 2
+                    current1->suivant = current2;
+                    break;
+                }
+                else {
+                    // Insertion de current2 dans m1
+                    element* newNode = creerElement(current2->col, current2->val);
+                    newNode->suivant = current1->suivant;
+                    current1->suivant = newNode;
+                }
+
+                current2 = current2->suivant;
             }
         }
     }
