@@ -229,7 +229,7 @@ int nombreOctetsGagnes(matrice_creuse m) {
     /* JSP SI J'AI LE BON RESULTAT*/
     int tailleTab = m.Ncolonnes * m.Nlignes * sizeof(int);
 
-    int tailleMat = sizeof(m) + m.Nlignes * sizeof(liste_ligne);
+    int tailleMat = sizeof(m) + m.Nlignes * sizeof(liste_ligne*);
 
     int nb_elem = 0;
 
