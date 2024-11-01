@@ -76,8 +76,14 @@ int main() {
                 break;
 
             case '7' :
-                // Ecrire ici le code pour ce choix utlisateur
-               break;
+                printf("\nRemplissez la matrice :\n");
+                matrice_creuse m;
+                remplirMatrice(&m, 5, 5);
+
+                afficherMatrice(m);
+
+                printf("Octets gagnes : %d", nombreOctetsGagnes(m));
+                break;
 
             case '8' :
                 printf("\n======== PROGRAMME TERMINE ========\n");
