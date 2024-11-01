@@ -10,7 +10,7 @@
 void remplirMatrice(matrice_creuse *m, int N, int M) {
     int val;
 
-    m->tab_lignes = (matrice_creuse *) malloc(sizeof(element) * N);
+    m->tab_lignes = (liste_ligne*) malloc(sizeof(element) * N);
 
     m->Nlignes = N;
     m->Ncolonnes = M;
