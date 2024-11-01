@@ -5,11 +5,11 @@
 
 int main() {
 
-
+    /*
     matrice_creuse m;
-
     remplirMatrice(&m, 3,3);
     afficherMatrice(m);
+    */
 
 
 
@@ -52,7 +52,31 @@ int main() {
                 break;
 
             case '6' :
-                // Ecrire ici le code pour ce choix utlisateur
+                printf("\n\nAddition de deux matrices creuses\n\n");
+                matrice_creuse m1;
+                matrice_creuse m2;
+
+                printf("\nMatrice 1 :\n");
+                remplirMatrice(&m1, 3, 3);
+
+
+                printf("\nMatrice 2 :\n");
+                remplirMatrice(&m2, 3, 3);
+
+                printf("\n");
+                afficherMatrice(m1);
+                printf("\n  +\n\n");
+                afficherMatrice(m2);
+                printf("\n=\n");
+
+                printf("\naddition...\n");
+
+                additionerMatrices(m1, m2);
+
+
+
+                afficherMatrice(m1);
+
                 break;
 
             case '7' :
