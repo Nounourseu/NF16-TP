@@ -10,7 +10,11 @@
 void remplirMatrice(matrice_creuse *m, int N, int M) {
     int val;
 
-    m->tab_lignes = (liste_ligne*) malloc(sizeof(element) * N);
+    if(m == NULL){
+        m = (matrice_creuse *) malloc(sizeof (matrice_creuse));
+    }
+
+    m->tab_lignes = (liste_ligne*) malloc(sizeof(liste_ligne) * N);
 
     m->Nlignes = N;
     m->Ncolonnes = M;
@@ -138,42 +142,75 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
         return;
     }
 
-    if(m.tab_lignes[i] == NULL){
-        m.tab_lignes[i] = creerElement(j,val);
-    }
-    else{
+    if(val == 0){
         element * current = m.tab_lignes[i];
         element * old = NULL;
 
+        int done = 1;
 
-        while(current){
+        while(current && done){
             if(current->col == j){
-                current->val = val;
-                current = NULL;
-            }
-            else if(current->col > j){
-                element * newEl = creerElement(j,val);
 
-                if(old != NULL){
-                    old->suivant = newEl;
-                    newEl->suivant = current;
-
+                if(old == NULL){
+                    m.tab_lignes[i] = current->suivant;
                 }
                 else{
-                    newEl->suivant = current;
-                    m.tab_lignes[i] = newEl;
+                    old->suivant = current->suivant;
                 }
+
+                free(current);
+                current = NULL;
+                done = 0;
             }
-
-            old = current;
-            current = current->suivant;
-        }
-
-        if(old->col < j){
-            element * newEl = creerElement(j,val);
-            old->suivant = newEl;
+            else{
+                old = current;
+                current = current->suivant;
+            }
         }
     }
+    else{
+        if(m.tab_lignes[i] == NULL){
+            m.tab_lignes[i] = creerElement(j,val);
+        }
+        else{
+            element * current = m.tab_lignes[i];
+            element * old = NULL;
+
+            int done = 1;
+
+            while(current && done){
+                if(current->col == j){
+                    current->val = val;
+                    done = 0;
+                }
+                else if(current->col > j){
+                    element * newEl = creerElement(j,val);
+
+                    if(old != NULL){
+                        old->suivant = newEl;
+                        newEl->suivant = current;
+                    }
+                    else{
+                        newEl->suivant = current;
+                        m.tab_lignes[i] = newEl;
+                    }
+                    done = 0;
+                }
+                else{
+                    old = current;
+                    current = current->suivant;
+                }
+
+            }
+
+            if((old != NULL) && old->col < j){
+                element * newEl = creerElement(j,val);
+                old->suivant = newEl;
+            }
+        }
+    }
+
+
 
 
 }

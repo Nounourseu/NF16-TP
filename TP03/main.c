@@ -5,14 +5,9 @@
 
 int main() {
 
-    /*
-    matrice_creuse m;
-    remplirMatrice(&m, 3,3);
-    afficherMatrice(m);
-    */
 
-
-
+    matrice_creuse * m = (matrice_creuse *) malloc(sizeof (matrice_creuse));
+    m->tab_lignes = NULL;
 
     // ============= MENU UTILISATEUR ============= */
     char choix = '0';
@@ -32,23 +27,76 @@ int main() {
 
         switch (choix) {
             case '1' :
-                // Ecrire ici le code pour ce choix utlisateur
+
+                printf("\n\nVoyez donner la taille de votre matrice\n");
+                int N, M;
+                printf("Nombre de lignes : ");
+                scanf("%d", &N);
+                printf("\nNombre de colonnes : ");
+                scanf("%d", &M);
+                printf("\n");
+
+                remplirMatrice(m,N,M);
+
+                printf("Matrice remplie");
                 break;
 
             case '2' :
-                // Ecrire ici le code pour ce choix utlisateur
+                if(m->tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir une matrice\n");
+                }
+                else{
+                    printf("Voici votre matrice\n");
+                    afficherMatrice(*m);
+                }
                 break;
 
             case '3' :
-                // Ecrire ici le code pour ce choix utlisateur
+                if(m->tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir une matrice\n");
+                }
+                else{
+                    printf("Voici votre matrice\n");
+                    afficherMatriceListes(*m);
+                }
                 break;
 
             case '4' :
-                // Ecrire ici le code pour ce choix utlisateur
+                if(m->tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir une matrice\n");
+                }
+                else{
+                    printf("Quelle est la position de l'element que vous voulez\n");
+                    int i,j;
+                    printf("Ligne : ");
+                    scanf("%d", &i);
+                    printf("\nColonne : ");
+                    scanf("%d", &j);
+                    printf("\n");
+
+                    printf("Voici votre element : %d", rechercherValeur(*m,i,j));
+                }
                 break;
 
             case '5' :
-                // Ecrire ici le code pour ce choix utlisateur
+                if(m->tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir une matrice\n");
+                }
+                else{
+                    int val;
+                    printf("Quel element voulez vous placer : ");
+                    scanf("%d", &val);
+                    printf("\nOu voulez vous le placer\n");
+                    int i,j;
+                    printf("Ligne : ");
+                    scanf("%d", &i);
+                    printf("\nColonne : ");
+                    scanf("%d", &j);
+                    printf("\n");
+
+                    affecterValeur(*m,i,j,val);
+                    printf("Element place\n");
+                }
                 break;
 
             case '6' :
@@ -76,13 +124,12 @@ int main() {
                 break;
 
             case '7' :
-                printf("\nRemplissez la matrice :\n");
-                matrice_creuse m;
-                remplirMatrice(&m, 5, 5);
-
-                afficherMatrice(m);
-
-                printf("Octets gagnes : %d", nombreOctetsGagnes(m));
+                if(m->tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir une matrice\n");
+                }
+                else{
+                    printf("Octets gagnes : %d", nombreOctetsGagnes(*m));
+                }
                 break;
 
             case '8' :
