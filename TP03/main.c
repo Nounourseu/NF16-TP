@@ -28,7 +28,7 @@ int main() {
         switch (choix) {
             case '1' :
 
-                printf("\n\nVoyez donner la taille de votre matrice\n");
+                printf("\n\nVeuillez donner la taille de votre matrice\n");
                 int N, M;
                 printf("Nombre de lignes : ");
                 scanf("%d", &N);
@@ -67,12 +67,17 @@ int main() {
                 }
                 else{
                     printf("Quelle est la position de l'element que vous voulez\n");
-                    int i,j;
+                    int i = -1, j = -1;
                     printf("Ligne : ");
                     scanf("%d", &i);
+
                     printf("\nColonne : ");
                     scanf("%d", &j);
                     printf("\n");
+
+                    if (i>m->Nlignes || j>m->Ncolonnes) {
+                        printf("\nErreur : ligne ou colonne invalide\n");
+                    }
 
                     printf("Voici votre element : %d", rechercherValeur(*m,i,j));
                 }
@@ -93,6 +98,10 @@ int main() {
                     printf("\nColonne : ");
                     scanf("%d", &j);
                     printf("\n");
+
+                    if (i>m->Nlignes || j>m->Ncolonnes) {
+                        printf("\nErreur : ligne ou colonne invalide\n");
+                    }
 
                     affecterValeur(*m,i,j,val);
                     printf("Element place\n");
