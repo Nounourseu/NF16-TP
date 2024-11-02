@@ -105,10 +105,9 @@ void afficherMatrice(matrice_creuse m){
 void afficherMatriceListes(matrice_creuse m) {
     for(int i = 0; i < m.Nlignes; i++){
         element * current = m.tab_lignes[i];
-
-        while(current){
-            printf("%d ", current->val);
-
+        printf("\ni=%d ", i);
+        while(current!=NULL){
+            printf("-> [val=%d, col=%d] ", current->val, current->col);
             current = current->suivant;
         }
         printf("\n");
@@ -122,6 +121,7 @@ int rechercherValeur(matrice_creuse m, int i, int j) {
     int result = 0;
 
     element* elem = m.tab_lignes[i];
+
     while (elem!=NULL && elem->col<j) {
         elem = elem->suivant;
     }
