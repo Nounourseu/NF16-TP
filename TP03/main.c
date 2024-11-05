@@ -6,8 +6,10 @@
 int main() {
 
 
-    matrice_creuse m;
-    m.tab_lignes = NULL;
+    matrice_creuse m1;
+    m1.tab_lignes = NULL;
+    matrice_creuse m2;
+    m2.tab_lignes = NULL;
 
     // ============= MENU UTILISATEUR ============= */
     char choix = '0';
@@ -24,122 +26,276 @@ int main() {
         printf("\n======================================");
         printf("\n   Votre choix ? ");
         choix = getchar();
+        char sousChoix;
+        int i,j;
 
         switch (choix) {
             case '1' :
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
 
-                printf("\n\nVeuillez donner la taille de votre matrice\n");
                 int N, M;
-                printf("Nombre de lignes : ");
-                scanf("%d", &N);
-                printf("\nNombre de colonnes : ");
-                scanf("%d", &M);
-                printf("\n");
+                switch (sousChoix) {
+                    case '1' : printf("\n\nVeuillez donner la taille de votre matrice\n");
 
-                remplirMatrice(&m,N,M);
+                        printf("Nombre de lignes : ");
+                        scanf("%d", &N);
+                        printf("\nNombre de colonnes : ");
+                        scanf("%d", &M);
+                        printf("\n");
 
-                printf("Matrice remplie");
+                        remplirMatrice(&m1,N,M);
+
+                        printf("Matrice remplie");
+                        break;
+                    case '2':
+                        printf("\n\nVeuillez donner la taille de votre matrice\n");
+                        printf("Nombre de lignes : ");
+                        scanf("%d", &N);
+                        printf("\nNombre de colonnes : ");
+                        scanf("%d", &M);
+                        printf("\n");
+
+                        remplirMatrice(&m2,N,M);
+
+                        printf("Matrice remplie");
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
+                }
+
+
                 break;
 
             case '2' :
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
+
+                switch (sousChoix) {
+                    case '1' :
+                        if(m1.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 1\n");
+                        }
+                        else{
+                            printf("Voici votre matrice\n");
+                            afficherMatrice(m1);
+                        }
+                        break;
+                    case '2':
+                        if(m2.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 2\n");
+                        }
+                        else{
+                            printf("Voici votre matrice\n");
+                            afficherMatrice(m2);
+                        }
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
                 }
-                else{
-                    printf("Voici votre matrice\n");
-                    afficherMatrice(m);
-                }
+
+
                 break;
 
             case '3' :
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
-                }
-                else{
-                    printf("Voici votre matrice\n");
-                    afficherMatriceListes(m);
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
+
+                switch (sousChoix) {
+                    case '1' :
+                        if(m1.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 1\n");
+                        }
+                        else{
+                            printf("Voici votre matrice\n");
+                            afficherMatriceListes(m1);
+                        }
+                        break;
+                    case '2':
+                        if(m2.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 2\n");
+                        }
+                        else{
+                            printf("Voici votre matrice\n");
+                            afficherMatriceListes(m2);
+                        }
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
                 }
                 break;
 
             case '4' :
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
+
+                switch (sousChoix) {
+                    case '1' :
+                        if(m1.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 1\n");
+                        }
+                        else{
+                            printf("Quelle est la position de l'element que vous voulez\n");
+                            printf("Ligne : ");
+                            scanf("%d", &i);
+
+                            printf("\nColonne : ");
+                            scanf("%d", &j);
+                            printf("\n");
+
+                            if (i>m1.Nlignes || j>m1.Ncolonnes) {
+                                printf("\nErreur : ligne ou colonne invalide\n");
+                            }
+
+                            printf("Voici votre element : %d", rechercherValeur(m1,i,j));
+                        }
+                        break;
+                    case '2':
+                        if(m2.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 2\n");
+                        }
+                        else{
+                            printf("Quelle est la position de l'element que vous voulez\n");
+
+                            printf("Ligne : ");
+                            scanf("%d", &i);
+
+                            printf("\nColonne : ");
+                            scanf("%d", &j);
+                            printf("\n");
+
+                            if (i>m2.Nlignes || j>m2.Ncolonnes) {
+                                printf("\nErreur : ligne ou colonne invalide\n");
+                            }
+
+                            printf("Voici votre element : %d", rechercherValeur(m2,i,j));
+                        }
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
                 }
-                else{
-                    printf("Quelle est la position de l'element que vous voulez\n");
-                    int i = -1, j = -1;
-                    printf("Ligne : ");
-                    scanf("%d", &i);
 
-                    printf("\nColonne : ");
-                    scanf("%d", &j);
-                    printf("\n");
 
-                    if (i>m.Nlignes || j>m.Ncolonnes) {
-                        printf("\nErreur : ligne ou colonne invalide\n");
-                    }
-
-                    printf("Voici votre element : %d", rechercherValeur(m,i,j));
-                }
                 break;
 
             case '5' :
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
-                }
-                else{
-                    int val;
-                    printf("Quel element voulez vous placer : ");
-                    scanf("%d", &val);
-                    printf("\nOu voulez vous le placer\n");
-                    int i,j;
-                    printf("Ligne : ");
-                    scanf("%d", &i);
-                    printf("\nColonne : ");
-                    scanf("%d", &j);
-                    printf("\n");
 
-                    if (i>m.Nlignes || j>m.Ncolonnes) {
-                        printf("\nErreur : ligne ou colonne invalide\n");
-                    }
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
 
-                    affecterValeur(m,i,j,val);
-                    printf("Element place\n");
+                switch (sousChoix) {
+                    case '1' :
+                        if(m1.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 1\n");
+                        }
+                        else{
+                            int val;
+                            printf("Quel element voulez vous placer : ");
+                            scanf("%d", &val);
+                            printf("\nOu voulez vous le placer\n");
+                            printf("Ligne : ");
+                            scanf("%d", &i);
+                            printf("\nColonne : ");
+                            scanf("%d", &j);
+                            printf("\n");
+
+                            if (i>m1.Nlignes || j>m1.Ncolonnes) {
+                                printf("\nErreur : ligne ou colonne invalide\n");
+                            }
+
+                            affecterValeur(m1,i,j,val);
+                            printf("Element place\n");
+                        }
+                        break;
+                    case '2':
+                        if(m2.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 2\n");
+                        }
+                        else{
+                            int val;
+                            printf("Quel element voulez vous placer : ");
+                            scanf("%d", &val);
+                            printf("\nOu voulez vous le placer\n");
+                            printf("Ligne : ");
+                            scanf("%d", &i);
+                            printf("\nColonne : ");
+                            scanf("%d", &j);
+                            printf("\n");
+
+                            if (i>m2.Nlignes || j>m2.Ncolonnes) {
+                                printf("\nErreur : ligne ou colonne invalide\n");
+                            }
+
+                            affecterValeur(m2,i,j,val);
+                            printf("Element place\n");
+                        }
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
                 }
+
                 break;
 
             case '6' :
                 printf("\n\nAddition de deux matrices creuses\n\n");
 
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
+                if(m1.tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir la matrice 1\n");
+                }
+                else if(m2.tab_lignes == NULL){
+                    printf("Veuillez d'abord remplir la matrice 2\n");
+                }
+                else if(m1.Nlignes != m2.Nlignes || m1.Ncolonnes != m2.Ncolonnes){
+                    printf("Addition non possible, taille des matrices differentes");
                 }
                 else {
-                    matrice_creuse m2;
-
-                    printf("\nMatrice à ajouter :\n");
-                    remplirMatrice(&m2, m.Nlignes, m.Ncolonnes);
-
                     printf("\n");
-                    afficherMatrice(m);
+                    afficherMatrice(m1);
                     printf("\n  +\n\n");
                     afficherMatrice(m2);
                     printf("\n  =\n\n");
 
-                    additionerMatrices(m, m2);
+                    additionerMatrices(m1, m2);
 
-                    afficherMatrice(m);
+                    afficherMatrice(m1);
                 }
-
-
                 break;
 
             case '7' :
-                if(m.tab_lignes == NULL){
-                    printf("Veuillez d'abord remplir une matrice\n");
-                }
-                else{
-                    printf("Octets gagnes : %d", nombreOctetsGagnes(m));
+                printf("Matrice 1 ou matrice 2 (rentrez 1 ou 2) : ");
+                viderBuffer();
+                sousChoix = getchar();
+
+                switch (sousChoix) {
+                    case '1' :
+                        if(m1.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 1\n");
+                        }
+                        else{
+                            printf("Octets gagnes : %d", nombreOctetsGagnes(m1));
+                        }
+                        break;
+                    case '2':
+                        if(m2.tab_lignes == NULL){
+                            printf("Veuillez d'abord remplir la matrice 2\n");
+                        }
+                        else{
+                            printf("Octets gagnes : %d", nombreOctetsGagnes(m2));
+                        }
+                        break;
+                    default:
+                        printf("Ce numero n'est pas valide\n");
+                        break;
                 }
                 break;
 
