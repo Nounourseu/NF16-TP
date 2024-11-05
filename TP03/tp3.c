@@ -24,7 +24,7 @@ void remplirMatrice(matrice_creuse *m, int N, int M) {
     }
 
     for(int i = 0; i < N; i++){
-
+        element * current = m->tab_lignes[i];
         for(int j = 0; j < M; j++){
             printf("Donnez la valeur en %d,%d : ", i,j);
             scanf("%d", &val);
@@ -32,17 +32,13 @@ void remplirMatrice(matrice_creuse *m, int N, int M) {
             if(val != 0){
                 element * newEl = creerElement(j,val);
 
-                if(m->tab_lignes[i] == NULL){
+                if(current == NULL){
                     m->tab_lignes[i] = newEl;
                 }
                 else{
-                    element * current = m->tab_lignes[i];
-
-                    while(current->suivant){
-                        current = current->suivant;
-                    }
                     current->suivant = newEl;
                 }
+                current = newEl;
             }
 
         }
