@@ -59,6 +59,7 @@ void afficherMatrice(matrice_creuse m){
 
         element * current =  m.tab_lignes[i];
 
+        //Si la ligne est vide j'affiche que des 0
         if(current == NULL){
             for(int j = 0; j < m.Ncolonnes; j++){
                 printf("0 ");
@@ -68,13 +69,16 @@ void afficherMatrice(matrice_creuse m){
             element * old = current;
             current = current->suivant;
 
+            //Affiche les 0 avant le premier element de la liste chainée
             for(int j = 0; j < old->col; j++){
                 printf("0 ");
             }
 
             while (current){
+                //afficher la valeur de old
                 printf("%d ", old->val);
 
+                //Si les colonnes ne se succedent pas c'est qu'il faut ajouter des 0
                 for(int j = 0; j < current->col - old->col - 1; j++){
                     printf("0 ");
                 }
@@ -87,6 +91,7 @@ void afficherMatrice(matrice_creuse m){
 
             printf("%d ", old->val);
 
+            //Afficher les 0 apres le dernier element s'il y a
             if(old->col < m.Ncolonnes){
                 for(int j = 0; j < m.Ncolonnes - old->col - 1; j++){
                     printf("0 ");
@@ -149,6 +154,7 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
         int done = 1;
 
         while(current && done){
+            //Si j'ai à remplacer une valeur je le fais
             if(current->col == j){
 
                 if(old == NULL){
@@ -168,7 +174,9 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
             }
         }
     }
+    //Si c'est pas un 0
     else{
+        //Si la ligne est vide, je mets le nouvel élément avec la valeur
         if(m.tab_lignes[i] == NULL){
             m.tab_lignes[i] = creerElement(j,val);
         }
@@ -179,13 +187,16 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
             int done = 1;
 
             while(current && done){
+                //S'il faut ecraser une valeur
                 if(current->col == j){
                     current->val = val;
                     done = 0;
                 }
+                //Si il faut inserer une valeur
                 else if(current->col > j){
                     element * newEl = creerElement(j,val);
 
+                    //Si c'est au début
                     if(old != NULL){
                         old->suivant = newEl;
                         newEl->suivant = current;
@@ -203,6 +214,7 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
 
             }
 
+            //Si je suis arrivé à la fin de la liste
             if((old != NULL) && old->col < j){
                 element * newEl = creerElement(j,val);
                 old->suivant = newEl;
