@@ -227,42 +227,88 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) {
 
 // 6.	Ecrire une fonction qui réalise la somme de deux matrices
 void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
-    /*
-    * TO DO : Ecrire ici votre code
-    */
+
     element* current1;
     element* current2;
+    element* previous1;
 
     for (int i=0; i<m1.Nlignes; i++) {
         current1 = m1.tab_lignes[i];
         current2 = m2.tab_lignes[i];
-        if (current1==NULL) {
-            m1.tab_lignes[i] = m2.tab_lignes[i];
-        }
-        else {
-            while(current2!=NULL) {
+        previous1 = NULL;
 
-                while(current1->suivant!=NULL && current1->suivant->col <= current2->col) {
+        while(current1!=NULL && current2!=NULL) {
+
+            if (current1->col == current2->col) {
+                //On additionne les deux valeurs, si le résultat est nul on supprime l'element.
+
+                current1->val += current2->val;
+
+                if (current1->val == 0) {
+                //On supprime current1 si la somme est nulle
+
+                    if (previous1 == NULL) {
+                        m1.tab_lignes[i] = current1->suivant;
+                    }
+                    else {
+                        previous1->suivant = current1->suivant;
+                    }
+                    element* supr = current1;
                     current1 = current1->suivant;
-                }
-                if (current1->col == current2->col) {
-                    current1->val += current2->val;
-                }
-                else if (current1->suivant!=NULL){
-                    // On gagne du temps en ajoutant directement tout le reste de la liste 2
-                    current1->suivant = current2;
-                    break;
+                    free(supr);
                 }
                 else {
-                    // Insertion de current2 dans m1
-                    element* newNode = creerElement(current2->col, current2->val);
-                    newNode->suivant = current1->suivant;
-                    current1->suivant = newNode;
+                    previous1 = current1;
+                    current1 = current1->suivant;
                 }
 
                 current2 = current2->suivant;
             }
+            else if (current1->col > current2->col) {
+                //On ajoute current2 devant current1.
+
+                element* newNode = creerElement(current2->col, current2->val);
+                newNode->suivant = current1;
+
+                if (previous1==NULL) {
+                //Cas où current1 est le premier element de la liste
+                    m1.tab_lignes[i] = newNode;
+                }
+                else {
+                    previous1->suivant = newNode;
+                }
+
+                previous1 = previous1->suivant;
+                current2 = current2->suivant;
+
+            }
+            else {
+            //Cas où current1->col < current2->col
+                previous1 = current1;
+                current1 = current1->suivant;
+            }
+
         }
+
+        if (current1 == NULL) {
+        //On ajoute les elements restants de la liste 2 à la liste 1
+
+            if (previous1==NULL) {
+            //Si la liste 1 est vide, on crée son premier element
+
+                m1.tab_lignes[i] = creerElement(current2->col, current2->val);
+                previous1 = m1.tab_lignes[i];
+                current1 = previous1->suivant;
+                current2 = current2->suivant;
+            }
+            while(current2!=NULL) {
+                previous1->suivant = creerElement(current2->col, current2->val);
+
+                previous1 = previous1->suivant;
+                current2 = current2->suivant;
+            }
+        }
+
     }
 
 }
